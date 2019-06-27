@@ -19,14 +19,14 @@ server.use (express.json());
 
 server.get("/blogs", function (req, res) {
   var response = {
-    blogs: model.blogs
+    blogs: blogsModel.blogs
   };
     res.json(response);
 
 });
 
 server.post("/blogs", function (req, res) {
-  postsModel.create({
+  blogsModel.create({
     title: req.body.title,
     author:req.body.author,
     category: req.body.category,
