@@ -26,9 +26,26 @@ server.get("/blogs", function (req, res) {
 });
 
 server.post("/blogs", function (req, res) {
-  model.blogs.push(req.body.blog);
+  postsModel.create({
+    title: req.body.title,
+    author:req.body.author,
+    category: req.body.category,
+    image: req.body.image,
+    text: req.body.text
+  }).then(function ( new_blog ) {
+      res.status(201);
+      res.json(new_blog);
+  }).catch(function (error) {
+    //if anything went wrong above, error is caught here
+    var response = {
+      msg:error.message
+    };
+    res.status(400);
+    res.json(response);
+  });
+  /*model.blogs.push(req.body.blog);
   res.status(201);
-  res.send();
+  res.send();*/
 });
 
 mongoose.connect("mongodb+srv://Hoki-Lokison:LokisonHoki@mydatabase-exh3w.mongodb.net/test?retryWrites=true&w=majority", {
