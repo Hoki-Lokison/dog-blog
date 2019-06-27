@@ -60,6 +60,19 @@ server.post("/blogs", function (req, res) {
   res.send();*/
 });
 
+server.delete("/blogs/:id", function (req, res) {
+  blogsModel.findByIdAndDelete(req.params.id).then(function () {
+    res.status(204);
+    res.send();
+  }).catch(function (error) {
+    var response = {
+      msg:error.message
+    };
+    res.status(400);
+    res.json(response);
+  });
+});
+
 mongoose.connect("mongodb+srv://Hoki-Lokison:LokisonHoki@mydatabase-exh3w.mongodb.net/test?retryWrites=true&w=majority", {
   useNewUrlParser: true
 }).then(function () {
