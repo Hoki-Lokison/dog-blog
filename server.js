@@ -18,11 +18,23 @@ server.use (express.json());
 
 
 server.get("/blogs", function (req, res) {
-  var response = {
+  blogsModel.find().then(function (blogs) {
+    var response = {
+      blogs: blogs
+    };
+    res.json(response);
+  }).catch(function (error) {
+    var response = {
+      msg:error.message
+    };
+    res.status(400);
+    res.json(response);
+  });
+  /*var response = {
     blogs: blogsModel.blogs
   };
     res.json(response);
-
+*/
 });
 
 server.post("/blogs", function (req, res) {
