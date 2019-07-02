@@ -39,11 +39,11 @@ server.get("/blogs", function (req, res) {
 
 server.post("/blogs", function (req, res) {
   blogsModel.create({
-    title: req.body.title,
-    author:req.body.author,
-    category: req.body.category,
-    image: req.body.image,
-    text: req.body.text
+    title: req.body.blog.title,
+    author:req.body.blog.author,
+    category: req.body.blog.category,
+    image: req.body.blog.image,
+    text: req.body.blog.text
   }).then(function ( new_blog ) {
       res.status(201);
       res.json(new_blog);
