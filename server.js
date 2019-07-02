@@ -73,6 +73,22 @@ server.delete("/blogs/:id", function (req, res) {
   });
 });
 
+server.get("/blogs/:id", function (req, res) {
+  blogsModel.findById(req.params.id).then(function (blog) {
+    res.status(201);
+    var response = {
+      blog: blog
+    };
+    res.json(response);
+  }).catch(function (error) {
+    var response = {
+      msg:error.message
+    };
+    res.status(400);
+    res.json(response);
+  });
+});
+
 mongoose.connect("mongodb+srv://Hoki-Lokison:LokisonHoki@mydatabase-exh3w.mongodb.net/test?retryWrites=true&w=majority", {
   useNewUrlParser: true
 }).then(function () {
